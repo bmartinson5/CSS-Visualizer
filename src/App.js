@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment, useReducer, useState } from 'react';
 import './App.css';
 
+import Selection from './components/Selection'
+import SelectionDisplay from './components/SelectionDisplay'
+import Header from './components/Header'
+
+const defaultSelectionState = {
+  elements: 3,
+  margin: 30,
+}
+
+function selectionReducer(state = defaultSelectionState, action) {
+  console.log({action})
+  switch (action.type) {
+    case 'update': 
+      return {
+        ...state,
+        [action.attribute]: action.value,
+      }
+    default: 
+      return state
+  }
+}
+
 function App() {
+  const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
+
+  const handleChangeSelection = (attribute, value) => {
+    dispatch({type:'update', attribute, value})
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <main className="co-dashboard">
+        <Selection selectionState={selectionState} changeSelection={handleChangeSelection}/>
+        <SelectionDisplay selectionState={selectionState}/>
+      </main>
+    </Fragment>
   );
 }
 
