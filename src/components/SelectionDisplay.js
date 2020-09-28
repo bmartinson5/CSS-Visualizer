@@ -5,15 +5,15 @@ function SelectionDisplay({
   selectionState,
 }) {
 
+  console.log(selectionState.styling)
+
   const buildPage = () => {
     let elements = [];
     for (let x = 0; x < selectionState.elements; ++x) {
       elements.push(
         <div 
           className='element' 
-          style={{
-            '--margin': `${selectionState.margin}px`,
-          }}
+          style={selectionState.styling}
         >
           {x+1}
         </div>
