@@ -5,30 +5,28 @@ function SelectionDisplay({
   selectionState,
 }) {
 
-  console.log(selectionState.styling)
-
   const buildPage = () => {
-    let elements = [];
+    const elements = [];
     for (let x = 0; x < selectionState.elements; ++x) {
       elements.push(
-        <div 
-          className='element' 
+        <div
+          className='element'
           style={selectionState.styling}
         >
-          {x+1}
-        </div>
-      )
+
+        </div>,
+      );
     }
     return (
-      <div className='elements-container'>
+      <div className='elements-container' style={selectionState.containerStyling}>
         {elements}
       </div>
     );
-  }
+  };
 
   return (
     <Fragment>
-      <section className="co-mainPage">
+      <section className='co-mainPage'>
         {buildPage()}
       </section>
     </Fragment>

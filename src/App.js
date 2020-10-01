@@ -1,62 +1,79 @@
 import React, { Fragment, useReducer, useState } from 'react';
 import './App.css';
 
-import Selection from './components/Selection'
-import SelectionDisplay from './components/SelectionDisplay'
-import Header from './components/Header'
-import { act } from 'react-dom/test-utils';
+import Selection from './components/Selection';
+import SelectionDisplay from './components/SelectionDisplay';
+import Header from './components/Header';
 
 const defaultSelectionState = {
   elements: 3,
-  currentStyleSelected: 'margin',
+  selectedStyle: 'margin',
+  selectedContainerStyle: 'flex-direction',
   styling: {
     margin: '30px',
     height: '100px',
-  }
-}
+  },
+  containerStyling: {
+    'flex-direction': 'row',
+  },
+};
 
 function selectionReducer(state = defaultSelectionState, action) {
-  console.log({action})
   switch (action.type) {
-    case 'update': 
+    case 'update':
+      return {
+        ...state,
+        [action.attribute]: action.value,
+        styling: {
+          ...state.styling,
+        },
+        containerStyling: {
+          ...state.containerStyling,
+        },
+      };
+    case 'updateStyling':
+      return {
+        ...state,
+        styling: {
+          ...state.styling,
+          [action.attribute]: action.value,
+        },
+        containerStyling: {
+          ...state.containerStyling,
+        },
+      };
+    case 'updateContainerStyling':
       return {
         ...state,
         styling: {
           ...state.styling,
         },
-        [action.attribute]: action.value,
-      }
-    case 'updateStyling': 
-      return {
-        ...state,
-        styling: {
-          [action.attribute]:action.value,
+        containerStyling: {
+          ...state.containerStyling,
+          [action.attribute]: action.value,
         },
-      }
-    default: 
-      return state
+      };
+    default:
+      return state;
   }
 }
 
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
 
-  const handleChangeSelection = (attribute, value) => {
-    dispatch({type:'update', attribute, value})
-  }
-
-  const handleChangeStyling = (attribute, value) => {
-    dispatch({type:'updateStyling', attribute, value})
-  }
+  const handleChange = (type, attribute, value) => {
+    dispatch({ type, attribute, value });
+  };
 
   return (
     <Fragment>
       <Header />
-      <main className="co-dashboard">
-        <Selection 
-          selectionState={selectionState} 
-          changeSelection={handleChangeSelection}
-          changeStyling={handleChangeStyling}
+      <main className='co-dashboard'>
+        <Selection
+          selectionState={selectionState}
+          changeSelection={handleChange.bind(null, 'update')}
+          changeStyling={handleChange.bind(null, 'updateStyling')}
+          changeContainerStyling={handleChange.bind(null, 'updateContainerStyling')}
         />
         <SelectionDisplay selectionState={selectionState}/>
       </main>

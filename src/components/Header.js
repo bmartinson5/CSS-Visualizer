@@ -7,7 +7,7 @@ function App() {
     <Fragment>
       <header className="co-header">
         <div className='header-title'>
-          CSSzer
+          CSS Layouts
         </div>
       </header >
     </Fragment>
