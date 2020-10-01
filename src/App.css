@@ -24,6 +24,7 @@
 
 .co-mainPage {
   flex-grow: 1;
+  overflow: scroll;
 }
 
 .header-title {
@@ -52,8 +53,8 @@
   font-size: large;
 }
 
-.co-input-selection input {
-  width: 48px;
+input {
+  width: 100px;
 }
 
 .elements-container {
@@ -65,14 +66,8 @@
 }
 
 .element {
-  flex: 1;
   border: 1px solid black;
   border-radius: 10px;
-  height: var(--height);
-  max-width: 200px;
-  margin: var(--margin);
-  text-align: center;
-  line-height: 120px;
   background-color: paleturquoise;
 }
 
@@ -98,7 +93,7 @@
 }
 
 .style-selection-container {
-  margin-top: 48px;
+  margin-top: 12px;
 }
 
 .style-selection-header {
@@ -106,3 +101,10 @@
   text-align: center;
   margin-bottom: 12px;
 }
+
+.style-option {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+

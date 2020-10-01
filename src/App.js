@@ -7,14 +7,16 @@ import Header from './components/Header';
 
 const defaultSelectionState = {
   elements: 3,
-  selectedStyle: 'margin',
-  selectedContainerStyle: 'flex-direction',
+  selectedStyleType: 'Container',
   styling: {
     margin: '30px',
     height: '100px',
+    width: '300px',
   },
   containerStyling: {
     'flex-direction': 'row',
+    'justify-content': 'space-between',
+    'flex-flow': 'row wrap',
   },
 };
 

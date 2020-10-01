@@ -1,40 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import '../App.css';
+import classNames from 'classnames';
+
 import StyleSection from './StyleSection';
 
-
-function getStyleValue(style) {
-  let unitOfMeasurement = 'px';
-  if (style.includes('%')) {
-    unitOfMeasurement = '%';
-  }
-
-  return {
-    number: style.split(unitOfMeasurement)[0],
-    unit: unitOfMeasurement,
-  };
-}
-
-function isValidPecentage(number) {
-  return number >= 0 && number <= 100;
-}
-
-function isValidPxSize(number) {
-  return number >= 0;
-}
 
 function Selection({
   changeSelection,
   changeStyling,
-  changeContainerStyling,
   selectionState,
 }) {
 
-
-  const currentStyle = selectionState.selectedStyle;
-  const currentContainerStyle = selectionState.selectedContainerStyle;
-  const currentStyleValues = getStyleValue(selectionState.styling[currentStyle]);
-  const currentContainerStyleValue = selectionState.containerStyling[currentContainerStyle];
+  const { selectedStyleType, elements } = selectionState;
 
   const handleChangeElements = (attr, newValue, isNumber) => {
     if (!isNumber || newValue >= 1) {
@@ -42,19 +19,38 @@ function Selection({
     }
   };
 
-  const handleChangeStyling = (newValueNumber, unit) => {
-    if ((unit === 'px' && isValidPxSize(newValueNumber)) ||
-        (unit === '%' && isValidPecentage(newValueNumber))) {
-      const newValue = newValueNumber.toString() + unit;
-      changeStyling(currentStyle, newValue);
+  const buildStyleSections = () => {
+    let selectionType = 'containerStyling';
+    if (selectedStyleType === 'Elements') {
+      selectionType = 'styling';
     }
+
+    return (
+      <StyleSection
+        selectionState={selectionState}
+        selectionType={selectionType}
+        changeStyling={changeStyling}
+      />
+    );
   };
 
-  const containerOptions = [
-    'flex-direction',
-    'justify-content',
-    'flex-flow',
-  ];
+
+  const buildSelectionHeaders = (headers, identifier) => {
+    return headers.map((header) => {
+      const stylesClasses = classNames({
+        'layout-selection': true,
+        'layout-selected': header === selectionState[identifier],
+      });
+      return (
+        <div
+          className={stylesClasses}
+          onClick={() => changeSelection(identifier, header)}
+        >
+          {header}
+        </div>
+      );
+    });
+  };
 
   return (
     <Fragment>
@@ -74,59 +70,20 @@ function Selection({
             </label>
             <input
               type='number'
-              value={selectionState.elements}
+              value={elements}
               onChange={(e) => handleChangeElements('elements', e.target.value, true)}
             />
           </div>
 
-          <StyleSection
-            header='Container Styles'
-            options={containerOptions}
-            selectionState={selectionState}
-            selectionTypeName='selectedContainerStyle'
-            selectionType='containerStyling'
-            changeSelection={changeSelection}
-            changeStyling={changeContainerStyling}
-          />
-
-
-          <div className='style-selection-container'>
-            <div className='style-selection-header'>
-              Element Styles
-            </div>
-            <div className='co-input-selection'>
-              <select
-                name='styling'
-                value={currentStyle}
-                onChange={(e) => handleChangeElements('selectedStyle', e.target.value)}
-              >
-                <option value='margin'>Margin</option>
-                <option value='height'>Height</option>
-              </select>
-              <input
-                type='number'
-                value={currentStyleValues.number}
-                onChange={(e) => handleChangeStyling(e.target.value, currentStyleValues.unit)}
-              />
-              <label>
-                <input
-                  type='radio'
-                  checked={currentStyleValues.unit === 'px'}
-                  onChange={() => handleChangeStyling(30, 'px')}
-                />
-              px
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  checked={currentStyleValues.unit === '%'}
-                  onChange={() => handleChangeStyling(5, '%')}
-                />
-              %
-              </label>
-            </div>
-          </div>
         </div>
+
+        <div className='layout-selection-container'>
+          {buildSelectionHeaders(['Container', 'Elements'], 'selectedStyleType')}
+        </div>
+        <div className='selection-container'>
+          {buildStyleSections()}
+        </div>
+
       </section>
     </Fragment>
   );

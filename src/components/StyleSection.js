@@ -3,21 +3,28 @@ import '../App.css';
 
 function StyleSection({
   header,
-  options,
   selectionState,
   selectionType,
-  selectionTypeName,
   changeStyling,
-  changeSelection,
 }) {
-  const currentStyle = selectionState[selectionTypeName];
-  const currentStyleValue = selectionState[selectionType][currentStyle];
-  console.log({ selectionState, currentStyleValue });
+  const options = selectionState[selectionType];
 
   const buildOptions = () => {
-    return options.map((optionName) => {
+
+    return Object.entries(options).map(([styleName, styleValue]) => {
       return (
-        <option value={optionName}>{optionName}</option>
+        <div className='style-option'>
+          <div className='style-option-name'>
+            {styleName}
+          </div>
+          <div className='style-option-value'>
+            <input
+              type='text'
+              value={styleValue}
+              onChange={(e) => changeStyling(styleName, e.target.value)}
+            />
+          </div>
+        </div>
       );
     });
   };
@@ -25,23 +32,7 @@ function StyleSection({
   return (
     <Fragment>
       <div className='style-selection-container'>
-        <div className='style-selection-header'>
-          {header}
-        </div>
-        <div className='co-input-selection'>
-          <select
-            name='styling'
-            value={currentStyle}
-            onChange={(e) => changeSelection(selectionTypeName, e.target.value)}
-          >
-            {buildOptions()}
-          </select>
-          <input
-            type='text'
-            value={currentStyleValue}
-            onChange={(e) => changeStyling(currentStyle, e.target.value)}
-          />
-        </div>
+        {buildOptions()}
       </div>
     </Fragment>
   );
