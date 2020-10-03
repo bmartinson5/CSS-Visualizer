@@ -1,26 +1,15 @@
 import React, { Fragment, useReducer, useState } from 'react';
 import './App.css';
 
+import { defaultSelectionState } from './utilities/objects';
+
 import Selection from './components/Selection';
 import SelectionDisplay from './components/SelectionDisplay';
 import Header from './components/Header';
 
-const defaultSelectionState = {
-  elements: 3,
-  selectedStyleType: 'Container',
-  styling: {
-    margin: '30px',
-    height: '100px',
-    width: '300px',
-  },
-  containerStyling: {
-    'flex-direction': 'row',
-    'justify-content': 'space-between',
-    'flex-flow': 'row wrap',
-  },
-};
 
 function selectionReducer(state = defaultSelectionState, action) {
+  console.log({ action });
   switch (action.type) {
     case 'update':
       return {
@@ -77,7 +66,10 @@ function App() {
           changeStyling={handleChange.bind(null, 'updateStyling')}
           changeContainerStyling={handleChange.bind(null, 'updateContainerStyling')}
         />
-        <SelectionDisplay selectionState={selectionState}/>
+        <SelectionDisplay
+          selectionState={selectionState}
+          changeSelection={handleChange.bind(null, 'update')}
+        />
       </main>
     </Fragment>
   );

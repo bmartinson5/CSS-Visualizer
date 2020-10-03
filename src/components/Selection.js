@@ -8,6 +8,7 @@ import StyleSection from './StyleSection';
 function Selection({
   changeSelection,
   changeStyling,
+  changeContainerStyling,
   selectionState,
 }) {
 
@@ -20,15 +21,20 @@ function Selection({
   };
 
   const buildStyleSections = () => {
-    let selectionType = 'containerStyling';
-    if (selectedStyleType === 'Elements') {
-      selectionType = 'styling';
+    if (selectedStyleType === 'Container') {
+      return (
+        <StyleSection
+          selectionState={selectionState}
+          selectionType='containerStyling'
+          changeStyling={changeContainerStyling}
+        />
+      );
     }
 
     return (
       <StyleSection
         selectionState={selectionState}
-        selectionType={selectionType}
+        selectionType='styling'
         changeStyling={changeStyling}
       />
     );

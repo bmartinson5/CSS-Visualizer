@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import '../App.css';
 
 function StyleSection({
-  header,
   selectionState,
   selectionType,
   changeStyling,

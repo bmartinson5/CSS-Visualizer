@@ -58,8 +58,6 @@ input {
 }
 
 .elements-container {
-  min-width: 100%;
-  height: 100vh;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -106,5 +104,9 @@ input {
   display: flex;
   justify-content: space-between;
   margin-bottom: 6px;
+}
+
+.selected-element {
+  border: 2px solid yellow !important;
 }
 
