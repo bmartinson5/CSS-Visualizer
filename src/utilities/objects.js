@@ -1,4 +1,4 @@
-const defaultNumberOfElements = 3;
+export const defaultNumberOfElements = 30;
 
 export const defaultSelectionState = {
   elements: defaultNumberOfElements,
@@ -102,7 +102,7 @@ export const defaultElementStyles = {
   },
   background: {
     background: '',
-    'background-color': 'blue',
+    'background-color': 'white',
     opacity: '',
     'background-image': '',
     'background-repeat': '',

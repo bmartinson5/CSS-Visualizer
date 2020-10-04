@@ -1,0 +1,5 @@
+.co-dashboard {
+  display: flex;
+  flex-flow: row;
+  min-height: 100vh
+}

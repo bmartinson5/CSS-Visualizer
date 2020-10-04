@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import classNames from 'classnames';
-import '../App.css';
+import '../css/selectionDisplay.css';
+import { defaultContainerStyles } from '../utilities/objects';
 
 function SelectionDisplay({
   selectionState,
   changeSelection,
   elementStyles,
-  containerStyles,
 }) {
-  const { selectedElement, selectedContainer, elements } = selectionState;
+  const { selectedElement, elements } = selectionState;
 
   const getStyles = (elementId) => {
     const arrOfObjs = Object.values(elementStyles[elementId]);
@@ -25,7 +25,6 @@ function SelectionDisplay({
     const content = [];
     for (let x = 0; x < elements; ++x) {
       const styles = getStyles(x);
-      console.log({ styles });
       const isSelected = selectedElement === x;
       const elementClasses = classNames({
         element: true,
@@ -45,7 +44,7 @@ function SelectionDisplay({
     return (
       <div
         className='elements-container'
-        style={containerStyles[selectedContainer]}
+        style={defaultContainerStyles}
       >
         {content}
       </div>

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import '../App.css';
+import '../css/styleSection.css';
 
 function StyleSection({
   options,

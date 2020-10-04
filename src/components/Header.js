@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import '../App.css';
+import '../css/header.css';
+import { ReactComponent as MountainIcon } from '../images/mountains.svg';
 
 
 function App() {
@@ -7,7 +8,10 @@ function App() {
     <Fragment>
       <header className='co-header'>
         <div className='header-title'>
-          CASCADES
+          <div className='header-icon'>
+            <MountainIcon />
+          </div>
+          Cascades
         </div>
       </header >
     </Fragment>

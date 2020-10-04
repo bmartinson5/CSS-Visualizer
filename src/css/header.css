@@ -1,0 +1,25 @@
+.header-icon { 
+  display: inline-block;
+  transform: translate(-20%, 10%);
+}
+
+.co-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:#474747;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .14);
+  overflow: hidden;
+}
+
+.header-title {
+  color: #a9f0d1;
+  margin-left: 24px;
+  font-weight: 600;
+  font-size: large;
+  font-size: xx-large;
+  padding: 4px 12px;
+  display:inline-block;
+  margin-left: 60px;
+}

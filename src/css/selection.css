@@ -1,40 +1,10 @@
-.co-dashboard {
-  display: flex;
-  flex-flow: row;
-  min-height: 100vh
-}
-
-.co-header {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  background: white;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .14);
-}
-
 .co-navbar {
-  z-index: 1000;
   flex: 1;
   max-width: 360px;
   min-width: 360px;
   border-right: 3px solid #ebebeb;
   background-color:  #f7f7f7;
-}
-
-.co-mainPage {
-  flex-grow: 1;
-  overflow: scroll;
-}
-
-.header-title {
-  margin-left: 24px;
-  font-weight: 600;
-  font-size: large;
-  border: 2px solid orange;
-  border-radius: 10px;
-  padding: 4px 12px;
+  overflow: hidden;
 }
 
 .selection-container {
@@ -56,18 +26,6 @@
 
 input {
   width: 100px;
-}
-
-.elements-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-.element {
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: paleturquoise;
 }
 
 .layout-selection-container {
@@ -93,34 +51,16 @@ input {
   font-weight: 600;
 }
 
-.style-selection-container {
-  margin-top: 12px;
-}
-
 .style-selection-header {
   font-size: large;
   text-align: center;
   margin-bottom: 12px;
 }
 
-.style-option {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.selected-element {
-  border: 2px solid yellow !important;
-}
-
 .styles-section-header {
   font-size: x-large;
   margin: 12px;
   text-align: center;
-}
-
-.add-element-container {
-
 }
 
 .selection-button {
@@ -133,4 +73,3 @@ input {
   background-color: white;
   cursor: pointer;
 }
-

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useReducer, useState } from 'react';
-import './App.css';
+import './css/selection.css';
 
-import { defaultContainerStyles, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
+import { defaultNumberOfElements, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
 
 import Selection from './components/Selection';
 import SelectionDisplay from './components/SelectionDisplay';
@@ -21,22 +21,10 @@ function selectionReducer(state = defaultSelectionState, action) {
 }
 
 function elementStylesReducer(state, action) {
-  console.log({ action });
   const { elementId, styleName, value, styleType } = action;
   switch (action.type) {
     case 'update':
       return updateState(state, `${elementId}.${styleType}.${styleName}`, value);
-    default:
-      return state;
-  }
-}
-
-function elementContainerStylesReducer(state, action) {
-  console.log({ action });
-  const { elementId, styleName, value } = action;
-  switch (action.type) {
-    case 'update':
-      return updateState(state, `${elementId}.${styleName}`, value);
     default:
       return state;
   }
@@ -52,15 +40,9 @@ function createDefaultStyles(numOfElements, defaultStyles) {
 
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
-  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, createDefaultStyles(3, defaultElementStyles));
-  const [containerStyles, dispatchContainerStyles] = useReducer(elementContainerStylesReducer, createDefaultStyles(3, defaultContainerStyles));
+  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, createDefaultStyles(defaultNumberOfElements, defaultElementStyles));
 
-  const handleChangeStyles = (type, name, value) => {
-    if (type === 'container') {
-      dispatchContainerStyles({ type: 'update', elementId: selectionState.selectedContainer, styleName: name, value });
-      return;
-    }
-
+  const handleChangeStyles = (name, value) => {
     dispatchElementStyles({
       type: 'update',
       elementId: selectionState.selectedElement,
@@ -81,16 +63,13 @@ function App() {
         <Selection
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
-          changeElementStyles={handleChangeStyles.bind(null, 'element')}
-          changeContainerStyles={handleChangeStyles.bind(null, 'container')}
+          changeElementStyles={handleChangeStyles}
           elementStyles={elementStyles}
-          containerStyles={containerStyles}
         />
         <SelectionDisplay
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
           elementStyles={elementStyles}
-          containerStyles={containerStyles}
         />
       </main>
     </Fragment>

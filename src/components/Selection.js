@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import '../App.css';
+import '../css/App.css';
 import classNames from 'classnames';
 
 import StyleSection from './StyleSection';
@@ -8,20 +8,12 @@ import { ReactComponent as PlusIcon } from '../images/plus.svg';
 
 function Selection({
   elementStyles,
-  containerStyles,
   changeSelection,
   changeElementStyles,
-  changeContainerStyles,
   selectionState,
 }) {
 
-  const { elements, selectedElement, selectedContainer, selectedStyleType } = selectionState;
-
-  const handleChangeElements = (attr, newValue, isNumber) => {
-    if (!isNumber || newValue >= 1) {
-      changeSelection(attr, newValue);
-    }
-  };
+  const { selectedElement, selectedStyleType } = selectionState;
 
   const handleAddElement = () => {
 

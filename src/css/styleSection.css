@@ -1,0 +1,9 @@
+.style-option {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.style-selection-container {
+  margin-top: 12px;
+}
