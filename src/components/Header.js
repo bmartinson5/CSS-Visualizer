@@ -5,9 +5,9 @@ import '../App.css';
 function App() {
   return (
     <Fragment>
-      <header className="co-header">
+      <header className='co-header'>
         <div className='header-title'>
-          CSS Layouts
+          CASCADES
         </div>
       </header >
     </Fragment>

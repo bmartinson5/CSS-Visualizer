@@ -1,7 +1,7 @@
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useEffect, useReducer, useState } from 'react';
 import './App.css';
 
-import { defaultSelectionState } from './utilities/objects';
+import { defaultContainerStyles, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
 
 import Selection from './components/Selection';
 import SelectionDisplay from './components/SelectionDisplay';
@@ -9,48 +9,60 @@ import Header from './components/Header';
 
 
 function selectionReducer(state = defaultSelectionState, action) {
-  console.log({ action });
   switch (action.type) {
     case 'update':
       return {
         ...state,
         [action.attribute]: action.value,
-        styling: {
-          ...state.styling,
-        },
-        containerStyling: {
-          ...state.containerStyling,
-        },
-      };
-    case 'updateStyling':
-      return {
-        ...state,
-        styling: {
-          ...state.styling,
-          [action.attribute]: action.value,
-        },
-        containerStyling: {
-          ...state.containerStyling,
-        },
-      };
-    case 'updateContainerStyling':
-      return {
-        ...state,
-        styling: {
-          ...state.styling,
-        },
-        containerStyling: {
-          ...state.containerStyling,
-          [action.attribute]: action.value,
-        },
       };
     default:
       return state;
   }
 }
 
+function elementStylesReducer(state, action) {
+  console.log({ action });
+  const { elementId, styleName, value } = action;
+  switch (action.type) {
+    case 'update':
+      return updateState(state, `${elementId}.${styleName}`, value);
+    default:
+      return state;
+  }
+}
+
+function elementContainerStylesReducer(state, action) {
+  console.log({ action });
+  const { elementId, styleName, value } = action;
+  switch (action.type) {
+    case 'update':
+      return updateState(state, `${elementId}.${styleName}`, value);
+    default:
+      return state;
+  }
+}
+
+function createDefaultStyles(numOfElements, defaultStyles) {
+  const defaultObject = {};
+  for (let x = 0; x < numOfElements; ++x) {
+    defaultObject[x] = defaultStyles;
+  }
+  return defaultObject;
+}
+
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
+  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, createDefaultStyles(3, defaultElementStyles));
+  const [containerStyles, dispatchContainerStyles] = useReducer(elementContainerStylesReducer, createDefaultStyles(3, defaultContainerStyles));
+
+  const handleChangeStyles = (type, name, value) => {
+    if (type === 'container') {
+      dispatchContainerStyles({ type: 'update', elementId: selectionState.selectedContainer, styleName: name, value });
+      return;
+    }
+
+    dispatchElementStyles({ type: 'update', elementId: selectionState.selectedElement, styleName: name, value });
+  };
 
   const handleChange = (type, attribute, value) => {
     dispatch({ type, attribute, value });
@@ -63,12 +75,16 @@ function App() {
         <Selection
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
-          changeStyling={handleChange.bind(null, 'updateStyling')}
-          changeContainerStyling={handleChange.bind(null, 'updateContainerStyling')}
+          changeElementStyles={handleChangeStyles.bind(null, 'element')}
+          changeContainerStyles={handleChangeStyles.bind(null, 'container')}
+          elementStyles={elementStyles}
+          containerStyles={containerStyles}
         />
         <SelectionDisplay
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
+          elementStyles={elementStyles}
+          containerStyles={containerStyles}
         />
       </main>
     </Fragment>

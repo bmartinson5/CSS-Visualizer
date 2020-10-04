@@ -5,41 +5,36 @@ import '../App.css';
 function SelectionDisplay({
   selectionState,
   changeSelection,
+  elementStyles,
+  containerStyles,
 }) {
-  const { selectedElements } = selectionState;
-
-  const getNewSelectedElements = (numberClicked) => {
-    if (selectedElements.includes(numberClicked)) {
-      return selectedElements.filter((elementNumber) => {
-        return elementNumber !== numberClicked;
-      });
-    }
-
-    return [...selectedElements, numberClicked];
-  };
+  const { selectedElement, selectedContainer, elements } = selectionState;
 
   const buildPage = () => {
-    const elements = [];
-    console.log({ selectedElements });
-    for (let x = 0; x < selectionState.elements; ++x) {
+    const content = [];
+    for (let x = 0; x < elements; ++x) {
+      const isSelected = selectedElement === x;
       const elementClasses = classNames({
         element: true,
-        'selected-element': selectionState.selectedElements.includes(x),
+        'selected-element': isSelected,
       });
 
-      elements.push(
+      content.push(
         <div
           className={elementClasses}
-          style={selectionState.styling}
-          onClick={() => changeSelection('selectedElements', getNewSelectedElements(x))}
+          style={elementStyles[x]}
+          onClick={() => changeSelection('selectedElement', x)}
         >
 
         </div>,
       );
     }
     return (
-      <div className='elements-container' style={selectionState.containerStyling}>
-        {elements}
+      <div
+        className='elements-container'
+        style={containerStyles[selectedContainer]}
+      >
+        {content}
       </div>
     );
   };

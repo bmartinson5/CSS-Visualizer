@@ -2,13 +2,14 @@ import React, { Fragment, useState } from 'react';
 import '../App.css';
 
 function StyleSection({
-  selectionState,
-  selectionType,
+  options,
   changeStyling,
 }) {
-  const options = selectionState[selectionType];
 
   const buildOptions = () => {
+    if (!options) {
+      return null;
+    }
 
     return Object.entries(options).map(([styleName, styleValue]) => {
       return (

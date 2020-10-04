@@ -6,13 +6,15 @@ import StyleSection from './StyleSection';
 
 
 function Selection({
+  elementStyles,
+  containerStyles,
   changeSelection,
-  changeStyling,
-  changeContainerStyling,
+  changeElementStyles,
+  changeContainerStyles,
   selectionState,
 }) {
 
-  const { selectedStyleType, elements } = selectionState;
+  const { elements, selectedElement, selectedContainer } = selectionState;
 
   const handleChangeElements = (attr, newValue, isNumber) => {
     if (!isNumber || newValue >= 1) {
@@ -20,43 +22,40 @@ function Selection({
     }
   };
 
-  const buildStyleSections = () => {
-    if (selectedStyleType === 'Container') {
-      return (
-        <StyleSection
-          selectionState={selectionState}
-          selectionType='containerStyling'
-          changeStyling={changeContainerStyling}
-        />
-      );
-    }
+  // const buildStyleSections = () => {
+  //     return (
+  //       <StyleSection
+  //         options={containerStyles[selectedContainer]}
+  //         changeStyling={changeContainerStyles}
+  //       />
+  //     );
+  //   }
 
-    return (
-      <StyleSection
-        selectionState={selectionState}
-        selectionType='styling'
-        changeStyling={changeStyling}
-      />
-    );
-  };
+  //   return (
+  //     <StyleSection
+  //       options={elementStyles[selectedElement]}
+  //       changeStyling={changeElementStyles}
+  //     />
+  //   );
+  // };
 
 
-  const buildSelectionHeaders = (headers, identifier) => {
-    return headers.map((header) => {
-      const stylesClasses = classNames({
-        'layout-selection': true,
-        'layout-selected': header === selectionState[identifier],
-      });
-      return (
-        <div
-          className={stylesClasses}
-          onClick={() => changeSelection(identifier, header)}
-        >
-          {header}
-        </div>
-      );
-    });
-  };
+  // const buildSelectionHeaders = (headers, identifier) => {
+  //   return headers.map((header) => {
+  //     const stylesClasses = classNames({
+  //       'layout-selection': true,
+  //       'layout-selected': header === selectionState[identifier],
+  //     });
+  //     return (
+  //       <div
+  //         className={stylesClasses}
+  //         onClick={() => changeSelection(identifier, header)}
+  //       >
+  //         {header}
+  //       </div>
+  //     );
+  //   });
+  // };
 
   return (
     <Fragment>
@@ -84,10 +83,23 @@ function Selection({
         </div>
 
         <div className='layout-selection-container'>
-          {buildSelectionHeaders(['Container', 'Elements'], 'selectedStyleType')}
+          Container Styles
         </div>
         <div className='selection-container'>
-          {buildStyleSections()}
+          <StyleSection
+            options={containerStyles[selectedContainer]}
+            changeStyling={changeContainerStyles}
+          />
+        </div>
+
+        <div className='layout-selection-container'>
+          Element Styles
+        </div>
+        <div className='selection-container'>
+          <StyleSection
+            options={elementStyles[selectedElement]}
+            changeStyling={changeElementStyles}
+          />
         </div>
 
       </section>
