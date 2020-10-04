@@ -15,6 +15,7 @@
 }
 
 .co-navbar {
+  z-index: 1000;
   flex: 1;
   max-width: 360px;
   min-width: 360px;
@@ -75,7 +76,7 @@ input {
 }
 
 .layout-selection {
-  flex-grow: 1;
+  width: 33.1%;
   cursor: pointer;
   text-transform: capitalize;
   text-align: center;

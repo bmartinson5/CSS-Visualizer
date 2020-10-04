@@ -97,7 +97,10 @@ function Selection({
           Styles
         </div>
         <div className='layout-selection-container'>
-          {buildSelectionHeaders(['size', 'color', 'space'])}
+          {buildSelectionHeaders(['format', 'background', 'box-model'])}
+        </div>
+        <div className='layout-selection-container'>
+          {buildSelectionHeaders(['text', 'content', 'misc'])}
         </div>
         <div className='selection-container'>
           <StyleSection
