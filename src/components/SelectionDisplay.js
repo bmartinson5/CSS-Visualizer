@@ -12,13 +12,20 @@ function SelectionDisplay({
 
   const getStyles = (elementId) => {
     const arrOfObjs = Object.values(elementStyles[elementId]);
-    return Object.assign({}, ...arrOfObjs);
+    const stylesObj = Object.assign({}, ...arrOfObjs);
+    Object.keys(stylesObj).forEach((key) => {
+      if (!stylesObj[key]) {
+        delete stylesObj[key];
+      }
+    });
+    return stylesObj;
   };
 
   const buildPage = () => {
     const content = [];
     for (let x = 0; x < elements; ++x) {
       const styles = getStyles(x);
+      console.log({ styles });
       const isSelected = selectedElement === x;
       const elementClasses = classNames({
         element: true,

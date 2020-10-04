@@ -3,6 +3,7 @@ import '../App.css';
 import classNames from 'classnames';
 
 import StyleSection from './StyleSection';
+import { ReactComponent as PlusIcon } from '../images/plus.svg';
 
 
 function Selection({
@@ -22,23 +23,9 @@ function Selection({
     }
   };
 
-  // const buildStyleSections = () => {
-  //     return (
-  //       <StyleSection
-  //         options={containerStyles[selectedContainer]}
-  //         changeStyling={changeContainerStyles}
-  //       />
-  //     );
-  //   }
+  const handleAddElement = () => {
 
-  //   return (
-  //     <StyleSection
-  //       options={elementStyles[selectedElement]}
-  //       changeStyling={changeElementStyles}
-  //     />
-  //   );
-  // };
-
+  };
 
   const buildSelectionHeaders = (headers) => {
     return headers.map((header) => {
@@ -61,37 +48,16 @@ function Selection({
   return (
     <Fragment>
       <section className='co-navbar'>
-        <div className='layout-selection-container'>
-          <div className='layout-selection layout-selected'>
-            Flexbox
-          </div>
-          <div className='layout-selection'>
-            Grid
-          </div>
-        </div>
-        <div className='selection-container'>
-          <div className='co-input-selection'>
-            <label>
-              # of Elements
-            </label>
-            <input
-              type='number'
-              value={elements}
-              onChange={(e) => handleChangeElements('elements', e.target.value, true)}
-            />
-          </div>
+        <div className='add-element-container'>
+          <button
+            className='selection-button'
+            onClick={handleAddElement}
+          >
+            <PlusIcon />
+            Add Element
+          </button>
 
         </div>
-
-        {/* <div className='layout-selection-container'>
-          Container Styles
-        </div>
-        <div className='selection-container'>
-          <StyleSection
-            options={containerStyles[selectedContainer]}
-            changeStyling={changeContainerStyles}
-          />
-        </div> */}
 
         <div className='styles-section-header'>
           Styles
