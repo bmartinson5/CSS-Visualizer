@@ -14,7 +14,7 @@ function Selection({
   selectionState,
 }) {
 
-  const { elements, selectedElement, selectedContainer } = selectionState;
+  const { elements, selectedElement, selectedContainer, selectedStyleType } = selectionState;
 
   const handleChangeElements = (attr, newValue, isNumber) => {
     if (!isNumber || newValue >= 1) {
@@ -40,22 +40,23 @@ function Selection({
   // };
 
 
-  // const buildSelectionHeaders = (headers, identifier) => {
-  //   return headers.map((header) => {
-  //     const stylesClasses = classNames({
-  //       'layout-selection': true,
-  //       'layout-selected': header === selectionState[identifier],
-  //     });
-  //     return (
-  //       <div
-  //         className={stylesClasses}
-  //         onClick={() => changeSelection(identifier, header)}
-  //       >
-  //         {header}
-  //       </div>
-  //     );
-  //   });
-  // };
+  const buildSelectionHeaders = (headers) => {
+    return headers.map((header) => {
+      const stylesClasses = classNames({
+        'layout-selection': true,
+        'layout-selected': header === selectionState.selectedStyleType,
+      });
+      return (
+        <div
+          className={stylesClasses}
+          onClick={() => changeSelection('selectedStyleType', header)}
+        >
+          {header}
+        </div>
+      );
+    });
+  };
+
 
   return (
     <Fragment>
@@ -82,7 +83,7 @@ function Selection({
 
         </div>
 
-        <div className='layout-selection-container'>
+        {/* <div className='layout-selection-container'>
           Container Styles
         </div>
         <div className='selection-container'>
@@ -90,14 +91,17 @@ function Selection({
             options={containerStyles[selectedContainer]}
             changeStyling={changeContainerStyles}
           />
-        </div>
+        </div> */}
 
+        <div className='styles-section-header'>
+          Styles
+        </div>
         <div className='layout-selection-container'>
-          Element Styles
+          {buildSelectionHeaders(['size', 'color', 'space'])}
         </div>
         <div className='selection-container'>
           <StyleSection
-            options={elementStyles[selectedElement]}
+            options={elementStyles[selectedElement][selectedStyleType]}
             changeStyling={changeElementStyles}
           />
         </div>

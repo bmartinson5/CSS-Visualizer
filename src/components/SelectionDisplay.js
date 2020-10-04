@@ -10,9 +10,15 @@ function SelectionDisplay({
 }) {
   const { selectedElement, selectedContainer, elements } = selectionState;
 
+  const getStyles = (elementId) => {
+    const arrOfObjs = Object.values(elementStyles[elementId]);
+    return Object.assign({}, ...arrOfObjs);
+  };
+
   const buildPage = () => {
     const content = [];
     for (let x = 0; x < elements; ++x) {
+      const styles = getStyles(x);
       const isSelected = selectedElement === x;
       const elementClasses = classNames({
         element: true,
@@ -22,7 +28,7 @@ function SelectionDisplay({
       content.push(
         <div
           className={elementClasses}
-          style={elementStyles[x]}
+          style={styles}
           onClick={() => changeSelection('selectedElement', x)}
         >
 

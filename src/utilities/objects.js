@@ -4,13 +4,22 @@ export const defaultSelectionState = {
   elements: defaultNumberOfElements,
   selectedElement: 0,
   selectedContainer: 0,
-  selectedStyleType: 'Container',
+  selectedStyleType: 'size',
 };
 
 export const defaultElementStyles = {
-  margin: '30px',
-  height: '100px',
-  width: '300px',
+  size: {
+    height: '100px',
+    width: '300px',
+  },
+  space: {
+    margin: '30px',
+    padding: '5px',
+  },
+  color: {
+    'background-color': 'blue',
+    color: 'yellow',
+  },
 };
 
 export const defaultContainerStyles = {
@@ -21,8 +30,6 @@ export const defaultContainerStyles = {
   width: '100%',
   'max-width': '100%',
 };
-
-
 
 export function updateState(state, fullName, value) {
   let nameBeforePeriod = fullName;

@@ -75,11 +75,13 @@ input {
 }
 
 .layout-selection {
-  width: 50%;
+  flex-grow: 1;
+  cursor: pointer;
+  text-transform: capitalize;
   text-align: center;
-  height: 48px;
-  line-height: 48px;
-  font-size: large;
+  height: 36px;
+  line-height: 36px;
+  font-size: medium;
   font-weight: 400;
   color: black;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2)
@@ -108,5 +110,11 @@ input {
 
 .selected-element {
   border: 2px solid yellow !important;
+}
+
+.styles-section-header {
+  font-size: x-large;
+  margin: 12px;
+  text-align: center;
 }
 

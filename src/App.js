@@ -22,10 +22,10 @@ function selectionReducer(state = defaultSelectionState, action) {
 
 function elementStylesReducer(state, action) {
   console.log({ action });
-  const { elementId, styleName, value } = action;
+  const { elementId, styleName, value, styleType } = action;
   switch (action.type) {
     case 'update':
-      return updateState(state, `${elementId}.${styleName}`, value);
+      return updateState(state, `${elementId}.${styleType}.${styleName}`, value);
     default:
       return state;
   }
@@ -61,7 +61,13 @@ function App() {
       return;
     }
 
-    dispatchElementStyles({ type: 'update', elementId: selectionState.selectedElement, styleName: name, value });
+    dispatchElementStyles({
+      type: 'update',
+      elementId: selectionState.selectedElement,
+      styleType: selectionState.selectedStyleType,
+      styleName: name,
+      value,
+    });
   };
 
   const handleChange = (type, attribute, value) => {
