@@ -4,15 +4,10 @@
   min-width: 360px;
   border-right: 3px solid #ebebeb;
   background-color:  #f7f7f7;
-  overflow: hidden;
+  height: calc(100vh - 60px);
+  overflow: scroll;
 }
 
-.selection-container {
-  margin: 12px 12px;
-  padding: 12px;
-  border-radius: 2px;
-  background-color: white;
-}
 
 .co-input-selection {
   display: flex;

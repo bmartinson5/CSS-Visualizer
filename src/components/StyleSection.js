@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import '../css/styleSection.css';
 
 function StyleSection({
+  headerNote,
   options,
   changeStyling,
 }) {
@@ -32,6 +33,9 @@ function StyleSection({
   return (
     <Fragment>
       <div className='style-selection-container'>
+        <div className='style-selection-header'>
+          * {headerNote}
+        </div>
         {buildOptions()}
       </div>
     </Fragment>

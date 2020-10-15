@@ -1,19 +1,26 @@
 import React, { Fragment, useState } from 'react';
 import classNames from 'classnames';
 import '../css/selectionDisplay.css';
-import { defaultContainerStyles } from '../utilities/objects';
+import { defaultContainerStyles, flexboxContainerStyles } from '../utilities/objects';
 
 function SelectionDisplay({
   selectionState,
   changeSelection,
   elementStyles,
+  containerStyles,
 }) {
   const { selectedElement, elements } = selectionState;
+
+  const getContainerStyles = () => {
+    return containerStyles;
+  }
 
   const getStyles = (elementId) => {
     const arrOfObjs = Object.values(elementStyles[elementId]);
     const stylesObj = Object.assign({}, ...arrOfObjs);
+    console.log({arrOfObjs, stylesObj})
     Object.keys(stylesObj).forEach((key) => {
+      //delete empty styles
       if (!stylesObj[key]) {
         delete stylesObj[key];
       }
@@ -44,7 +51,7 @@ function SelectionDisplay({
     return (
       <div
         className='elements-container'
-        style={defaultContainerStyles}
+        style={getContainerStyles()}
       >
         {content}
       </div>

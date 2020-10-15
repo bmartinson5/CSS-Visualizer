@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useReducer, useState } from 'react';
-import './css/selection.css';
+import './css/App.css';
 
-import { defaultNumberOfElements, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
+import { defaultNumberOfElements, defaultElementStyles, defaultSelectionState, updateState, flexboxContainerStyles } from './utilities/objects';
 
 import Selection from './components/Selection';
 import SelectionDisplay from './components/SelectionDisplay';
@@ -30,6 +30,16 @@ function elementStylesReducer(state, action) {
   }
 }
 
+function containerStylesReducer(state, action) {
+  const { styleName, value } = action;
+  switch (action.type) {
+    case 'update':
+      return updateState(state, `${styleName}`, value);
+    default:
+      return state;
+  }
+}
+
 function createDefaultStyles(numOfElements, defaultStyles) {
   const defaultObject = {};
   for (let x = 0; x < numOfElements; ++x) {
@@ -41,12 +51,21 @@ function createDefaultStyles(numOfElements, defaultStyles) {
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
   const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, createDefaultStyles(defaultNumberOfElements, defaultElementStyles));
+  const [containerStyles, dispatchContainerStyles] = useReducer(containerStylesReducer, flexboxContainerStyles);
 
-  const handleChangeStyles = (name, value) => {
+  const handleChangeElementStyles = (name, value) => {
     dispatchElementStyles({
       type: 'update',
       elementId: selectionState.selectedElement,
       styleType: selectionState.selectedStyleType,
+      styleName: name,
+      value,
+    });
+  };
+
+  const handleChangeContainerStyles = (name, value) => {
+    dispatchContainerStyles({
+      type: 'update',
       styleName: name,
       value,
     });
@@ -63,13 +82,16 @@ function App() {
         <Selection
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
-          changeElementStyles={handleChangeStyles}
+          changeElementStyles={handleChangeElementStyles}
+          changeContainerStyles={handleChangeContainerStyles}
           elementStyles={elementStyles}
+          containerStyles={containerStyles}
         />
         <SelectionDisplay
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
           elementStyles={elementStyles}
+          containerStyles={containerStyles}
         />
       </main>
     </Fragment>

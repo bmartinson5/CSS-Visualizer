@@ -1,10 +1,11 @@
-export const defaultNumberOfElements = 30;
+export const defaultNumberOfElements = 9;
 
 export const defaultSelectionState = {
   elements: defaultNumberOfElements,
   selectedElement: 0,
   selectedContainer: 0,
   selectedStyleType: 'format',
+  selectedPresetType: 'flexbox',
 };
 
 export const defaultElementStyles = {
@@ -63,7 +64,6 @@ export const defaultElementStyles = {
     left: '',
     clip: '',
     overflow: '',
-    'z-index': '',
     float: '',
     clear: '',
     visibility: '',
@@ -117,6 +117,15 @@ export const defaultElementStyles = {
 };
 
 export const defaultContainerStyles = {
+  'flex-direction': 'row',
+  'justify-content': 'space-between',
+  'flex-flow': 'row wrap',
+  height: '100%',
+  width: '100%',
+  'max-width': '100%',
+};
+
+export const flexboxContainerStyles = {
   'flex-direction': 'row',
   'justify-content': 'space-between',
   'flex-flow': 'row wrap',
