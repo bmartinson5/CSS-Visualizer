@@ -6,7 +6,7 @@ import StyleSection from './StyleSection';
 import { ReactComponent as PlusIcon } from '../images/plus.svg';
 
 
-function Selection({
+function Codebox({
   elementStyles,
   containerStyles,
   changeSelection,
@@ -56,42 +56,11 @@ function Selection({
 
   return (
     <Fragment>
-      {/* <div className='add-element-container'>
-          <button
-            className='selection-button'
-            onClick={handleAddElement}
-          >
-            <PlusIcon />
-            Add Element
-          </button>
-
-        </div> */}
       {buildSelectionHeaders(['code', 'selection'], 'selectedCssType', typeClasses)}
 
-      <div className='styles-section-header'>
-        Container Styles
-      </div>
-      <StyleSection
-        headerNote='Change css for the container'
-        options={containerStyles}
-        changeStyling={changeContainerStyles}
-      />
-
-
-      <div className='styles-section-header'>
-        Element Styles
-      </div>
-      {buildSelectionHeaders(['format', 'background', 'box-model'], 'selectedStyleType', layoutClasses)}
-      {buildSelectionHeaders(['text', 'content', 'misc'], 'selectedStyleType', layoutClasses)}
-      <StyleSection
-        headerNote='Change css for the selected element'
-        options={elementStyles[selectedElement][selectedStyleType]}
-        changeStyling={changeElementStyles}
-      />
-
+      <div className='style-selection-container'></div>
     </Fragment>
   );
 }
 
-export default Selection;
-
+export default Codebox;

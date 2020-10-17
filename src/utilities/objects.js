@@ -6,6 +6,7 @@ export const defaultSelectionState = {
   selectedContainer: 0,
   selectedStyleType: 'format',
   selectedPresetType: 'flexbox',
+  selectedCssType: 'code',
 };
 
 export const defaultElementStyles = {

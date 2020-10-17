@@ -14,6 +14,7 @@ function StyleSection({
 
     return Object.entries(options).map(([styleName, styleValue]) => {
       return (
+        // eslint-disable-next-line react/jsx-key
         <div className='style-option'>
           <div className='style-option-name'>
             {styleName}

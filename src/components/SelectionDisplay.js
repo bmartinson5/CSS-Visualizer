@@ -13,12 +13,11 @@ function SelectionDisplay({
 
   const getContainerStyles = () => {
     return containerStyles;
-  }
+  };
 
   const getStyles = (elementId) => {
     const arrOfObjs = Object.values(elementStyles[elementId]);
     const stylesObj = Object.assign({}, ...arrOfObjs);
-    console.log({arrOfObjs, stylesObj})
     Object.keys(stylesObj).forEach((key) => {
       //delete empty styles
       if (!stylesObj[key]) {

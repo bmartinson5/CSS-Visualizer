@@ -6,6 +6,7 @@ import { defaultNumberOfElements, defaultElementStyles, defaultSelectionState, u
 import Selection from './components/Selection';
 import SelectionDisplay from './components/SelectionDisplay';
 import Header from './components/Header';
+import Codebox from './components/Codebox';
 
 
 function selectionReducer(state = defaultSelectionState, action) {
@@ -75,10 +76,9 @@ function App() {
     dispatch({ type, attribute, value });
   };
 
-  return (
-    <Fragment>
-      <Header />
-      <main className='co-dashboard'>
+  const buildSelectionSection = () => {
+    if (selectionState.selectedCssType === 'selection') {
+      return (
         <Selection
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
@@ -87,12 +87,42 @@ function App() {
           elementStyles={elementStyles}
           containerStyles={containerStyles}
         />
-        <SelectionDisplay
-          selectionState={selectionState}
-          changeSelection={handleChange.bind(null, 'update')}
-          elementStyles={elementStyles}
-          containerStyles={containerStyles}
-        />
+      );
+    }
+    return (
+      <Codebox
+        selectionState={selectionState}
+        changeSelection={handleChange.bind(null, 'update')}
+        changeElementStyles={handleChangeElementStyles}
+        changeContainerStyles={handleChangeContainerStyles}
+        elementStyles={elementStyles}
+        containerStyles={containerStyles}
+      />
+    );
+
+  };
+
+  return (
+    <Fragment>
+      <Header />
+      <main className='co-dashboard'>
+        <section className='co-navbar'>
+          {buildSelectionSection()}
+        </section>
+        <div className='selection-display-container'>
+          <SelectionDisplay
+            selectionState={selectionState}
+            changeSelection={handleChange.bind(null, 'update')}
+            elementStyles={elementStyles}
+            containerStyles={containerStyles}
+          />
+          <SelectionDisplay
+            selectionState={selectionState}
+            changeSelection={handleChange.bind(null, 'update')}
+            elementStyles={elementStyles}
+            containerStyles={containerStyles}
+          />
+        </div>
       </main>
     </Fragment>
   );

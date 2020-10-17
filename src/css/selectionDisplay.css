@@ -1,5 +1,5 @@
 .co-mainPage {
-  flex-grow: 1;
+  border-right: 8px solid #ebebeb;
   overflow: auto;
 }
 
