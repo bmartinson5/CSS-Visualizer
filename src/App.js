@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useReducer, useState } from 'react';
 import './css/App.css';
 
-import { defaultNumberOfElements, defaultElementStyles, defaultSelectionState, updateState, flexboxContainerStyles } from './utilities/objects';
+import { buttonStyles, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
 
+import Styles from './components/Styles';
+import Display from './components/Display';
 import Selection from './components/Selection';
-import SelectionDisplay from './components/SelectionDisplay';
 import Header from './components/Header';
 import Codebox from './components/Codebox';
 
@@ -22,17 +23,7 @@ function selectionReducer(state = defaultSelectionState, action) {
 }
 
 function elementStylesReducer(state, action) {
-  const { elementId, styleName, value, styleType } = action;
-  switch (action.type) {
-    case 'update':
-      return updateState(state, `${elementId}.${styleType}.${styleName}`, value);
-    default:
-      return state;
-  }
-}
-
-function containerStylesReducer(state, action) {
-  const { styleName, value } = action;
+  const { styleName, value, styleType } = action;
   switch (action.type) {
     case 'update':
       return updateState(state, `${styleName}`, value);
@@ -41,36 +32,35 @@ function containerStylesReducer(state, action) {
   }
 }
 
-function createDefaultStyles(numOfElements, defaultStyles) {
-  const defaultObject = {};
-  for (let x = 0; x < numOfElements; ++x) {
-    defaultObject[x] = defaultStyles;
-  }
-  return defaultObject;
-}
+// function containerStylesReducer(state, action) {
+//   const { styleName, value } = action;
+//   switch (action.type) {
+//     case 'update':
+//       return updateState(state, `${styleName}`, value);
+//     default:
+//       return state;
+//   }
+// }
 
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
-  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, createDefaultStyles(defaultNumberOfElements, defaultElementStyles));
-  const [containerStyles, dispatchContainerStyles] = useReducer(containerStylesReducer, flexboxContainerStyles);
+  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, buttonStyles);
 
   const handleChangeElementStyles = (name, value) => {
     dispatchElementStyles({
       type: 'update',
-      elementId: selectionState.selectedElement,
-      styleType: selectionState.selectedStyleType,
       styleName: name,
       value,
     });
   };
 
-  const handleChangeContainerStyles = (name, value) => {
-    dispatchContainerStyles({
-      type: 'update',
-      styleName: name,
-      value,
-    });
-  };
+  // const handleChangeContainerStyles = (name, value) => {
+  //   dispatchContainerStyles({
+  //     type: 'update',
+  //     styleName: name,
+  //     value,
+  //   });
+  // };
 
   const handleChange = (type, attribute, value) => {
     dispatch({ type, attribute, value });
@@ -79,13 +69,11 @@ function App() {
   const buildSelectionSection = () => {
     if (selectionState.selectedCssType === 'selection') {
       return (
-        <Selection
+        <Styles
           selectionState={selectionState}
           changeSelection={handleChange.bind(null, 'update')}
           changeElementStyles={handleChangeElementStyles}
-          changeContainerStyles={handleChangeContainerStyles}
           elementStyles={elementStyles}
-          containerStyles={containerStyles}
         />
       );
     }
@@ -94,9 +82,7 @@ function App() {
         selectionState={selectionState}
         changeSelection={handleChange.bind(null, 'update')}
         changeElementStyles={handleChangeElementStyles}
-        changeContainerStyles={handleChangeContainerStyles}
         elementStyles={elementStyles}
-        containerStyles={containerStyles}
       />
     );
 
@@ -110,17 +96,15 @@ function App() {
           {buildSelectionSection()}
         </section>
         <div className='selection-display-container'>
-          <SelectionDisplay
+          <Display
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
             elementStyles={elementStyles}
-            containerStyles={containerStyles}
           />
-          <SelectionDisplay
+          <Selection
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
             elementStyles={elementStyles}
-            containerStyles={containerStyles}
           />
         </div>
       </main>

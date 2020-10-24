@@ -1,20 +1,14 @@
 .co-mainPage {
+  max-width: 400px;
+  padding: 100px;
   border-right: 8px solid #ebebeb;
   overflow: auto;
+  width: 100%;
+  flex: 1;
 }
 
 .elements-container {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.element {
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: paleturquoise;
-}
-
-.selected-element {
-  border: 2px solid yellow !important;
-}

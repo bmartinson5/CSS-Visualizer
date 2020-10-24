@@ -1,12 +1,9 @@
 export const defaultNumberOfElements = 9;
 
 export const defaultSelectionState = {
-  elements: defaultNumberOfElements,
-  selectedElement: 0,
-  selectedContainer: 0,
   selectedStyleType: 'format',
   selectedPresetType: 'flexbox',
-  selectedCssType: 'code',
+  selectedCssType: 'selection',
 };
 
 export const defaultElementStyles = {
@@ -166,3 +163,15 @@ export function updateState(state, fullName, value) {
 
   throw new Error(`${nameBeforePeriod} not found in ${JSON.stringify(state, null, 2)}`);
 }
+
+export const buttonStyles = {
+  margin: '20px',
+  'font-size': 'medium',
+  border: 'none',
+  'box-shadow': '0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149)',
+  'border-radius': '20px',
+  padding: '12px 16px',
+  'background-color': 'white',
+  cursor: 'pointer',
+  width: '80px',
+};
