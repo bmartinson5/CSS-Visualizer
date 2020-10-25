@@ -1,13 +1,3 @@
-.co-navbar {
-  flex: 1;
-  max-width: 360px;
-  min-width: 360px;
-  border-right: 3px solid #ebebeb;
-  background-color:  #EFF1ED;
-  height: calc(100vh - 60px);
-  overflow: scroll;
-}
-
 
 .co-input-selection {
   display: flex;

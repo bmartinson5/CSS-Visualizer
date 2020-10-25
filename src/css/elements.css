@@ -1,0 +1,50 @@
+.typesList-container {
+  width: 100%;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+
+
+.elementsList-main{
+  min-width: 400px;
+  border-right: 8px solid #ebebeb;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 60px);
+  background-color: #ebebfe;
+}
+
+.typesList-main {
+  flex: 1;
+  max-width: 360px;
+  min-width: 200px;
+  border-right: 3px solid #ebebeb;
+  background-color:  #efefef;
+  height: calc(100vh - 60px);
+  overflow: scroll;
+}
+
+.typesList-header {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.typesList-header--selected {
+  border-bottom: 2.5px solid #fabf94;
+}
+
+.typesList-item {
+  height: 80px;
+  text-transform: capitalize;
+}
+
+.typesList-header:hover {
+  border-bottom: 2.5px solid #fabf94;
+}
+
+.typesList-item--selected {
+}
+
+

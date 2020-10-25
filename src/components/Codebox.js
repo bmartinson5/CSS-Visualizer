@@ -9,7 +9,7 @@ import { ReactComponent as PlusIcon } from '../images/plus.svg';
 
 import { defaultCss } from '../utilities/objects';
 
-
+import 'ace-builds/src-noconflict/theme-solarized_light';
 function Codebox({
   elementStyles,
   changeSelection,
@@ -22,7 +22,7 @@ function Codebox({
     <Fragment>
       <AceEditor
         mode='css'
-        theme='dawn'
+        theme='solarized_light'
         value={defaultCss}
         height='50%'
         width='100%'

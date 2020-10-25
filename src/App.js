@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useReducer, useState } from 'react';
 import './css/App.css';
 
-import { buttonStyles, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
+import { buttonStyles, defaultElementStyles, defaultSelectionState, stylesObject, updateState } from './utilities/objects';
 
 import Styles from './components/Styles';
-import OLDDisplay from './components/OLDDisplay';
+import ElementTypesList from './components/ElementTypesList';
+import ElementsList from './components/ElementsList';
 import Selection from './components/Selection';
 import Header from './components/Header';
 import Codebox from './components/Codebox';
@@ -26,86 +27,48 @@ function elementStylesReducer(state, action) {
   const { styleName, value, styleType } = action;
   switch (action.type) {
     case 'update':
-      return updateState(state, `${styleName}`, value);
+      return updateState(state, `${styleType}.${styleName}`, value);
     default:
       return state;
   }
 }
 
-// function containerStylesReducer(state, action) {
-//   const { styleName, value } = action;
-//   switch (action.type) {
-//     case 'update':
-//       return updateState(state, `${styleName}`, value);
-//     default:
-//       return state;
-//   }
-// }
-
 function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
-  const [elementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, buttonStyles);
+  const [allElementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, stylesObject);
 
-  const handleChangeElementStyles = (name, value) => {
+  const handleChangeElementStyles = (styleType, styleName, value) => {
     dispatchElementStyles({
       type: 'update',
-      styleName: name,
+      styleName,
+      styleType,
       value,
     });
   };
 
-  // const handleChangeContainerStyles = (name, value) => {
-  //   dispatchContainerStyles({
-  //     type: 'update',
-  //     styleName: name,
-  //     value,
-  //   });
-  // };
-
   const handleChange = (type, attribute, value) => {
     dispatch({ type, attribute, value });
-  };
-
-  const buildSelectionSection = () => {
-    if (selectionState.selectedCssType === 'selection') {
-      return (
-        <Styles
-          selectionState={selectionState}
-          changeSelection={handleChange.bind(null, 'update')}
-          changeElementStyles={handleChangeElementStyles}
-          elementStyles={elementStyles}
-        />
-      );
-    }
-    return (
-      <Codebox
-        selectionState={selectionState}
-        changeSelection={handleChange.bind(null, 'update')}
-        changeElementStyles={handleChangeElementStyles}
-        elementStyles={elementStyles}
-      />
-    );
-
   };
 
   return (
     <Fragment>
       <Header />
       <main className='co-dashboard'>
-        <section className='co-navbar'>
-          {buildSelectionSection()}
-        </section>
+        <ElementTypesList
+          selectionState={selectionState}
+          elementStyles={allElementStyles}
+          changeSelection={handleChange.bind(null, 'update', 'elementType')}
+        />
+        <ElementsList
+          selectionState={selectionState}
+          elementStyles={allElementStyles}
+        />
         <div className='selection-display-container'>
-          <OLDDisplay
-            selectionState={selectionState}
-            changeSelection={handleChange.bind(null, 'update')}
-            elementStyles={elementStyles}
-          />
           <Selection
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
-            changeElementStyles={handleChangeElementStyles}
-            elementStyles={elementStyles}
+            changeElementStyles={handleChangeElementStyles.bind(null, selectionState.elementType)}
+            elementStyles={allElementStyles[selectionState.elementType][selectionState.selectedElement]}
           />
         </div>
       </main>
