@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import classNames from 'classnames';
 import '../css/selectionDisplay.css';
 import { defaultContainerStyles, flexboxContainerStyles } from '../utilities/objects';
+import { ReactComponent as PlusIcon } from '../images/plus.svg';
 
 function Display({
   selectionState,
@@ -9,18 +10,6 @@ function Display({
   elementStyles,
 }) {
 
-
-  // const getStyles = (elementId) => {
-  //   const arrOfObjs = Object.values(elementStyles[elementId]);
-  //   const stylesObj = Object.assign({}, ...arrOfObjs);
-  //   Object.keys(stylesObj).forEach((key) => {
-  //     //delete empty styles
-  //     if (!stylesObj[key]) {
-  //       delete stylesObj[key];
-  //     }
-  //   });
-  //   return stylesObj;
-  // };
 
   const buildPage = () => {
     const elementClasses = classNames({
@@ -35,6 +24,7 @@ function Display({
           className={elementClasses}
           style={elementStyles}
         >
+          <PlusIcon />
           Your text
         </div>
       </div>
@@ -43,10 +33,9 @@ function Display({
 
   return (
     <Fragment>
-      <div
-        className='co-mainPage'
-      >
+      <div className='display-container'>
         {buildPage()}
+
       </div>
     </Fragment>
   );

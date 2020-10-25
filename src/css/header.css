@@ -8,13 +8,13 @@
   display: flex;
   align-items: center;
   position: relative;
-  background:#474747;
+  background:#2B2D42;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .14);
   overflow: hidden;
 }
 
 .header-title {
-  color: #a9f0d1;
+  color: #BFFCFC;
   margin-left: 24px;
   font-weight: 600;
   font-size: large;

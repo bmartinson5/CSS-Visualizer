@@ -3,7 +3,7 @@
   max-width: 360px;
   min-width: 360px;
   border-right: 3px solid #ebebeb;
-  background-color:  #f7f7f7;
+  background-color:  #EFF1ED;
   height: calc(100vh - 60px);
   overflow: scroll;
 }

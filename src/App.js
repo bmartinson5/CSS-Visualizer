@@ -4,7 +4,7 @@ import './css/App.css';
 import { buttonStyles, defaultElementStyles, defaultSelectionState, updateState } from './utilities/objects';
 
 import Styles from './components/Styles';
-import Display from './components/Display';
+import OLDDisplay from './components/OLDDisplay';
 import Selection from './components/Selection';
 import Header from './components/Header';
 import Codebox from './components/Codebox';
@@ -96,7 +96,7 @@ function App() {
           {buildSelectionSection()}
         </section>
         <div className='selection-display-container'>
-          <Display
+          <OLDDisplay
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
             elementStyles={elementStyles}
@@ -104,6 +104,7 @@ function App() {
           <Selection
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
+            changeElementStyles={handleChangeElementStyles}
             elementStyles={elementStyles}
           />
         </div>

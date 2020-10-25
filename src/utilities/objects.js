@@ -3,7 +3,7 @@ export const defaultNumberOfElements = 9;
 export const defaultSelectionState = {
   selectedStyleType: 'format',
   selectedPresetType: 'flexbox',
-  selectedCssType: 'selection',
+  selectedCssType: 'css',
 };
 
 export const defaultElementStyles = {
@@ -175,3 +175,17 @@ export const buttonStyles = {
   cursor: 'pointer',
   width: '80px',
 };
+
+export const defaultCss =
+`.selection-button {
+  margin: '20px',
+  'font-size': 'medium',
+  border: 'none',
+  'box-shadow': '0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149)',
+  'border-radius': '20px',
+  padding: '12px 16px',
+  'background-color': 'white',
+  cursor: 'pointer',
+  width: '80px',
+};`;
+
