@@ -6,9 +6,11 @@
 
 .display-container {
   overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   zoom: 2;
+  max-width: 100%;
 }
 
 

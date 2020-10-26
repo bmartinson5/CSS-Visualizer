@@ -24,10 +24,10 @@ function selectionReducer(state = defaultSelectionState, action) {
 }
 
 function elementStylesReducer(state, action) {
-  const { styleName, value, styleType } = action;
+  const { styleName, value, elementType, elementName } = action;
   switch (action.type) {
     case 'update':
-      return updateState(state, `${styleType}.${styleName}`, value);
+      return updateState(state, `${elementType}.${elementName}.${styleName}`, value);
     default:
       return state;
   }
@@ -37,11 +37,12 @@ function App() {
   const [selectionState, dispatch] = useReducer(selectionReducer, defaultSelectionState);
   const [allElementStyles, dispatchElementStyles] = useReducer(elementStylesReducer, stylesObject);
 
-  const handleChangeElementStyles = (styleType, styleName, value) => {
+  const handleChangeElementStyles = (styleName, value) => {
     dispatchElementStyles({
       type: 'update',
       styleName,
-      styleType,
+      elementName: selectionState.selectedElement,
+      elementType: selectionState.elementType,
       value,
     });
   };
@@ -49,6 +50,8 @@ function App() {
   const handleChange = (type, attribute, value) => {
     dispatch({ type, attribute, value });
   };
+
+  const selectedElementStyles = allElementStyles[selectionState.elementType][selectionState.selectedElement];
 
   return (
     <Fragment>
@@ -61,14 +64,15 @@ function App() {
         />
         <ElementsList
           selectionState={selectionState}
-          elementStyles={allElementStyles}
+          allElementStyles={allElementStyles}
+          changeSelection={handleChange.bind(null, 'update', 'selectedElement')}
         />
         <div className='selection-display-container'>
           <Selection
             selectionState={selectionState}
             changeSelection={handleChange.bind(null, 'update')}
-            changeElementStyles={handleChangeElementStyles.bind(null, selectionState.elementType)}
-            elementStyles={allElementStyles[selectionState.elementType][selectionState.selectedElement]}
+            changeElementStyles={handleChangeElementStyles}
+            elementStyles={selectedElementStyles}
           />
         </div>
       </main>

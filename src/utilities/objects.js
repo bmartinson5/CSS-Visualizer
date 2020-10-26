@@ -5,7 +5,7 @@ export const defaultSelectionState = {
   selectedPresetType: 'flexbox',
   selectedCssType: 'css',
   elementType: 'buttons',
-  selectedElement: 'casual',
+  selectedElement: 'bx0001',
 };
 
 export const defaultElementStyles = {
@@ -166,18 +166,24 @@ export function updateState(state, fullName, value) {
   throw new Error(`${nameBeforePeriod} not found in ${JSON.stringify(state, null, 2)}`);
 }
 
+const defaultButtonStyles = {
+  margin: '20px',
+  'font-size': 'medium',
+  border: 'none',
+  'box-shadow': '0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149)',
+  'border-radius': '20px',
+  padding: '12px 16px',
+  'background-color': 'white',
+  cursor: 'pointer',
+  height: '20px',
+  width: '80px',
+};
 export const buttonStyles = {
-  casual: {
-    margin: '20px',
-    'font-size': 'medium',
-    border: 'none',
-    'box-shadow': '0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149)',
-    'border-radius': '20px',
-    padding: '12px 16px',
-    'background-color': 'white',
-    cursor: 'pointer',
-    width: '80px',
-  },
+  bx0001: defaultButtonStyles,
+  bx0002: defaultButtonStyles,
+  bx0003: defaultButtonStyles,
+  bx0004: defaultButtonStyles,
+  bx0005: defaultButtonStyles,
 };
 
 export const stylesObject = {
@@ -187,8 +193,8 @@ export const stylesObject = {
   navbars: {},
   inputs: {},
   radios: {},
-
 };
+
 
 export const defaultCss =
 `.selection-button {

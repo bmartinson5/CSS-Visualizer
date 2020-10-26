@@ -14,7 +14,6 @@
 .selection-topHalf {
   height: 50%;
   background-color: white;
-  border-bottom: 1px solid black;
   display: flex;
   justify-content: center;
 }
@@ -27,13 +26,11 @@
 }
 
 .selection-inputs {
-  border-right: 1px solid black;
   height: 100%;
   flex: 2;
 }
 
 .selection-inputs2 {
-  border-right: 1px solid black;
   height: 100%;
   flex: 1;
 }

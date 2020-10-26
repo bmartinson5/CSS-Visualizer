@@ -11,7 +11,7 @@ function Selection({
   changeElementStyles,
   elementStyles,
 }) {
-
+  console.log({ elementStyles });
   const { selectedStyleType } = selectionState;
 
   const layoutClasses = {
@@ -50,26 +50,6 @@ function Selection({
     );
   };
 
-  const buildCodebox = () => {
-    if (selectionState.selectedCssType === 'inputs') {
-      return (
-        <StyleSection
-          headerNote='Change css for the selected element'
-          options={elementStyles}
-          changeStyling={changeElementStyles}
-        />
-      );
-    }
-    return (
-      <Codebox
-        selectionState={selectionState}
-        changeSelection={changeSelection}
-        changeElementStyles={changeElementStyles}
-        elementStyles={elementStyles}
-      />
-    );
-  };
-
   const buildPage = () => {
     return (
       <div
@@ -83,12 +63,21 @@ function Selection({
           />
         </div>
         <div className='selection-bottomHalf'>
+          <div className='selection-inputs2'>
+            <StyleSection
+              headerNote='Change css for the selected element'
+              options={elementStyles}
+              changeStyling={changeElementStyles}
+            />
+          </div>
           <div className='selection-inputs'>
             {buildSelectionHeaders(['css', 'inputs'], 'selectedCssType', typeClasses)}
-            {buildCodebox()}
-          </div>
-          <div className='selection-inputs2'>
-
+            <Codebox
+              selectionState={selectionState}
+              changeSelection={changeSelection}
+              changeElementStyles={changeElementStyles}
+              elementStyles={elementStyles}
+            />
           </div>
         </div>
       </div>

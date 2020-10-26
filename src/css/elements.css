@@ -5,17 +5,6 @@
 }
 
 
-
-.elementsList-main{
-  min-width: 400px;
-  border-right: 8px solid #ebebeb;
-  overflow: hidden;
-  width: 100%;
-  flex: 1;
-  height: calc(100vh - 60px);
-  background-color: #ebebfe;
-}
-
 .typesList-main {
   flex: 1;
   max-width: 360px;
@@ -45,6 +34,27 @@
 }
 
 .typesList-item--selected {
+}
+
+
+.elementsList-main{
+  min-width: 400px;
+  border-right: 8px solid #ebebeb;
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+  height: calc(100vh - 60px);
+  background-color: #ebebfe;
+}
+
+.elementsList-item {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.elementsList-item--selected {
+  background-color: #dfdffa;
 }
 
 
